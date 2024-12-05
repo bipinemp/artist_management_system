@@ -9,6 +9,7 @@ import authRoutes from "./routes/authRoutes";
 import userRoutes from "./routes/userRoutes";
 import artistRoutes from "./routes/artistRoutes";
 import musicRoutes from "./routes/musicRoutes";
+import pool from "./configs/db";
 
 const app: Express = express();
 const PORT = process.env.PORT;
@@ -23,6 +24,13 @@ app.use(
     credentials: true,
   })
 );
+
+async function dbrun() {
+  const countResult = await pool.query("SELECT COUNT(id) from users");
+  console.log("countREsult : ", countResult);
+}
+
+dbrun();
 
 // Routes
 app.use("/api/auth", authRoutes);
