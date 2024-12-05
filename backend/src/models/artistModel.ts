@@ -5,10 +5,18 @@ export const getArtists = async (page: number = 1, pageSize: number = 10) => {
     const skip = (page - 1) * pageSize;
 
     const result = await pool.query(
-      `SELECT artist.*, music.id, music.title, music.album_name, music.genre
-       FROM Artist
+      `SELECT artist.*,
+       COALESCE(json_agg(json_build_object(
+        'id', music.id,
+        'title', music.title,
+        'album_name', music.album_name,
+        'genre', music.genre
+        ) 
+       ) FILTER (WHERE music.id IS NOT NULL), '[]') AS musics
+       FROM artist
        LEFT JOIN music
        ON artist.id = music.artist_id
+       GROUP BY artist.id
        LIMIT $1 OFFSET $2
        `,
       [pageSize, skip]
@@ -26,6 +34,7 @@ export const getArtists = async (page: number = 1, pageSize: number = 10) => {
       },
     };
   } catch (error) {
+    console.log(error);
     throw new Error("Unable to fetch artists from database.");
   }
 };
@@ -71,14 +80,13 @@ export const updateArtist = async (
     }
 
     const updateResult = await pool.query(
-      `UPDATE artist SET name = $1, dob = $2, gender = $3, address = $4, gender = $5, first_release_year = $6, no_of_albums_released = $7 
-       WHERE id = $8 RETURNING *`,
+      `UPDATE artist SET name = $1, dob = $2, gender = $3, address = $4, first_release_year = $5, no_of_albums_released = $6 
+       WHERE id = $7 RETURNING *`,
       [
         name,
         dob,
         gender,
         address,
-        gender,
         first_release_year,
         no_of_albums_released,
         id,

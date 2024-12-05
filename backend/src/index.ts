@@ -25,12 +25,14 @@ app.use(
   })
 );
 
-async function dbrun() {
-  const countResult = await pool.query("SELECT COUNT(id) from users");
-  console.log("countREsult : ", countResult);
-}
+// async function dbrun() {
+//   const countResult =
+//     await pool.query(`INSERT INTO users (first_name, last_name, email, password, phone, dob, gender, address)
+// VALUES ('John', 'Doe', 'johndoe@example.com', 'securepassword123', '+1234567890', '1990-01-01 00:00:00', 'm', '123 Main St, Springfield, IL')`);
+//   console.log("countREsult : ", countResult);
+// }
 
-dbrun();
+// dbrun();
 
 // Routes
 app.use("/api/auth", authRoutes);

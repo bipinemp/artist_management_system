@@ -5,10 +5,11 @@ export const getUsers = async (page: number = 1, pageSize: number = 10) => {
   try {
     const skip = (page - 1) * pageSize;
 
-    const result = await pool.query("SELECT * FROM users LIMIT $1 OFFSET $2", [
-      pageSize,
-      skip,
-    ]);
+    const result = await pool.query(
+      `SELECT id, first_name, last_name, email, phone, dob, gender, address 
+       FROM users LIMIT $1 OFFSET $2`,
+      [pageSize, skip]
+    );
 
     const usersCountResult = await pool.query("SELECT COUNT(id) from users");
     const totalUsers = parseInt(usersCountResult.rows[0].count);
@@ -50,7 +51,7 @@ export const createUser = async (
 
     const result = await pool.query(
       `INSERT INTO users (first_name, last_name, email, password, phone, dob, gender, address) 
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING id, first_name, last_name, email, phone, dob, gender, address`,
       [
         first_name,
         last_name,
@@ -88,7 +89,8 @@ export const updateUser = async (
     }
 
     const updateResult = await pool.query(
-      "UPDATE users SET first_name = $1, last_name = $2, phone = $3, dob = $4, gender = $5, address = $6 WHERE id = $7 RETURNING *",
+      `UPDATE users SET first_name = $1, last_name = $2, phone = $3, dob = $4, gender = $5, address = $6 WHERE id = $7 
+       RETURNING id, first_name, last_name, email, phone, dob, gender, address`,
       [first_name, last_name, phone, dob, gender, address, id]
     );
 

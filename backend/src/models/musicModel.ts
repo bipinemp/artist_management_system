@@ -74,11 +74,12 @@ export const updateMusic = async (
 
     return updateResult.rows[0];
   } catch (error) {
+    console.log(error);
     throw new Error("Unable to update music in database.");
   }
 };
 
-export const deleteArtist = async (id: number) => {
+export const deleteMusic = async (id: number) => {
   try {
     const musicExists = await pool.query("SELECT id FROM music WHERE id = $1", [
       id,
