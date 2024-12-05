@@ -1,7 +1,7 @@
 CREATE TYPE gender_enum AS ENUM ('m', 'f', 'o');
 CREATE TYPE genre_enum AS ENUM ('rnb', 'country', 'classic', 'rock', 'jazz');
 
-CREATE TABLE IF NOT EXISTS user(
+CREATE TABLE users(
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(255),
     last_name VARCHAR(255),
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS user(
     updated_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS artist(
+CREATE TABLE artist(
     id SERIAL PRIMARY KEY,
     dob TIMESTAMP(0) NOT NULL,
     gender gender_enum NOT NULL,
@@ -26,14 +26,15 @@ CREATE TABLE IF NOT EXISTS artist(
     updated_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
-CREATE TABLE MUSIC IF NOT EXISTS music(
+CREATE TABLE music(
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     album_name VARCHAR(255) NOT NULL,
     genre genre_enum NOT NULL,
+    artist_id INT NOT NULL,
     created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP NOT NULL
+    updated_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP NOT NULL,
     
-    FOREIGN KEY (artist_id) INT REFERENCES artist(id) ON DELETE CASCADE
+    FOREIGN KEY (artist_id) REFERENCES artist(id) ON DELETE CASCADE
 );
 
