@@ -16,7 +16,7 @@ export const getAllArtistMusics = async (
 
     return response.data;
   } catch (error: any) {
-    return error;
+    throw new Error(error);
   }
 };
 

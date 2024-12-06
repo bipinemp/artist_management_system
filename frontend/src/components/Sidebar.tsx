@@ -1,7 +1,7 @@
 import { sidebarLinks } from "../constants/sidebarLinks";
 import { NavLink } from "react-router-dom";
 import { Button } from "./ui/button";
-import { LogOut } from "lucide-react";
+import { LogOut, Mic2, UsersRound } from "lucide-react";
 import { useAuth } from "../context/authContext";
 
 const Sidebar = () => {
@@ -18,7 +18,7 @@ const Sidebar = () => {
         </div>
 
         <div className="flex flex-col gap-y-1">
-          {sidebarLinks.map((link) => (
+          {sidebarLinks.map((link, idx) => (
             <NavLink
               to={link.url}
               key={link.title}
@@ -26,9 +26,14 @@ const Sidebar = () => {
               className={({ isActive }) =>
                 `${
                   isActive ? "bg-secondary/20" : ""
-                } font-semibold text-lg tracking-wide py-3 px-5 transition hover:bg-secondary/20`
+                } flex items-center gap-x-2 font-semibold text-lg tracking-wide py-3 px-5 transition hover:bg-secondary/20`
               }
             >
+              {idx === 0 ? (
+                <UsersRound className="size-6" />
+              ) : (
+                <Mic2 className="size-6" />
+              )}{" "}
               {link.title}
             </NavLink>
           ))}

@@ -13,6 +13,9 @@ import DashboardLayout from "./components/DashboardLayout.tsx";
 import User from "./pages/dashboard/User.tsx";
 import Artist from "./pages/dashboard/Artist.tsx";
 import Music from "./pages/dashboard/Music.tsx";
+import NotFound from "./components/NotFound.tsx";
+import { ErrorBoundary } from "react-error-boundary";
+import { ErrorFallback } from "./components/ErrorFallback.tsx";
 
 const router = createBrowserRouter([
   { path: "/", element: <AuthRedirect /> },
@@ -20,7 +23,9 @@ const router = createBrowserRouter([
     path: "/login",
     element: (
       <PublicRoute>
-        <Login />
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Login />
+        </ErrorBoundary>
       </PublicRoute>
     ),
   },
@@ -28,7 +33,9 @@ const router = createBrowserRouter([
     path: "/register",
     element: (
       <PublicRoute>
-        <Register />
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Register />
+        </ErrorBoundary>
       </PublicRoute>
     ),
   },
@@ -36,11 +43,21 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <DashboardLayout />,
     children: [
-      { index: true, element: <User /> },
-      { path: "/dashboard/artist", element: <Artist /> },
-      { path: "/dashboard/:name/:id/musics", element: <Music /> },
+      {
+        index: true,
+        element: <User />,
+      },
+      {
+        path: "/dashboard/artist",
+        element: <Artist />,
+      },
+      {
+        path: "/dashboard/:name/:id/musics",
+        element: <Music />,
+      },
     ],
   },
+  { path: "*", element: <NotFound /> },
 ]);
 
 createRoot(document.getElementById("root")!).render(

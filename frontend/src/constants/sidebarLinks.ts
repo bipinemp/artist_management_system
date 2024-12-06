@@ -1,10 +1,10 @@
 export const sidebarLinks = [
   {
-    title: "User",
+    title: "Users",
     url: "/dashboard",
   },
   {
-    title: "Artist",
+    title: "Artists",
     url: "/dashboard/artist",
   },
 ];

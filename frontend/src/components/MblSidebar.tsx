@@ -1,4 +1,4 @@
-import { LogOut, Menu } from "lucide-react";
+import { LogOut, Menu, Mic2, UsersRound } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -37,21 +37,21 @@ const MblSidebar = () => {
               onClick={() => setOpenSidebar(false)}
               to="/dashboard"
               className={cn(
-                "w-full bg-zinc-50 py-4 px-10 text-lg font-semibold transition hover:bg-zinc-200",
+                "w-full flex items-center gap-x-2 bg-zinc-50 py-4 px-10 text-lg font-semibold transition hover:bg-zinc-200",
                 { "bg-zinc-200": pathname === "/dashboard" }
               )}
             >
-              Users
+              <UsersRound className="size-5" /> Users
             </Link>
             <Link
               onClick={() => setOpenSidebar(false)}
               to="/dashboard/artist"
               className={cn(
-                "w-full bg-zinc-50 py-4 px-10 text-lg font-semibold transition hover:bg-zinc-200",
+                "w-full flex items-center gap-x-2 bg-zinc-50 py-4 px-10 text-lg font-semibold transition hover:bg-zinc-200",
                 { "bg-zinc-200": pathname === "/dashboard/artist" }
               )}
             >
-              Artists
+              <Mic2 className="size-5" /> Artists
             </Link>
           </div>
           <Button

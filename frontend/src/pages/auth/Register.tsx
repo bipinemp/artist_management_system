@@ -61,7 +61,7 @@ const Register = ({
   return (
     <Card
       className={cn("border-primary/30 max-w-md", {
-        "mx-auto bg-zinc-100": !fromDashboard,
+        "mx-auto bg-white": !fromDashboard,
       })}
     >
       <CardHeader>

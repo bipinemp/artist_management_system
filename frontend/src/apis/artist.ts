@@ -11,7 +11,7 @@ export const getAllArtists = async (page = 1, pageSize = 10) => {
 
     return response.data;
   } catch (error: any) {
-    return error;
+    throw new Error(error);
   }
 };
 

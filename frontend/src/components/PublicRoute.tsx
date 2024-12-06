@@ -10,9 +10,7 @@ const PublicRoute = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <div className="py-10 bg-gradient-to-r from-violet-500 to-purple-500 min-h-screen h-full">
-      {children}
-    </div>
+    <div className="py-10 bg-gray-200 min-h-screen h-full">{children}</div>
   );
 };
 

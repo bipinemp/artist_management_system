@@ -2,6 +2,8 @@ import { Navigate, Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { useAuth } from "../context/authContext";
 import MblSidebar from "./MblSidebar";
+import { ErrorBoundary } from "react-error-boundary";
+import { ErrorFallback } from "./ErrorFallback";
 
 const DashboardLayout = () => {
   const { auth } = useAuth();
@@ -15,7 +17,9 @@ const DashboardLayout = () => {
       <Sidebar />
       <div className="w-full px-6 pb-10 pt-5 md:px-5 md:pl-60">
         <MblSidebar />
-        <Outlet />
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Outlet />
+        </ErrorBoundary>
       </div>
     </div>
   );

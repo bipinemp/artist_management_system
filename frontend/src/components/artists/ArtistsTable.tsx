@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Edit, Eye, Loader } from "lucide-react";
+import { Edit, Loader, Music4 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -47,7 +47,11 @@ const ArtistsTable = () => {
     queryFn: () => getAllArtists(page, 10),
   });
 
-  const { mutate: deleteArtistRecord, isPending: isDeleting } = useMutation({
+  const {
+    mutate: deleteArtistRecord,
+    isPending: isDeleting,
+    isError,
+  } = useMutation({
     mutationFn: deleteArtist,
     onSettled(data: any) {
       if (data.status === 200) {
@@ -109,7 +113,7 @@ const ArtistsTable = () => {
                 <th scope="col" className="px-6 py-3 whitespace-nowrap">
                   No of albums
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 text-center">
                   Actions
                 </th>
               </tr>
@@ -195,9 +199,8 @@ const ArtistsTable = () => {
                         <Button
                           variant={"secondary"}
                           className="border border-gray-500"
-                          size={"icon"}
                         >
-                          <Eye className="size-5" />
+                          <Music4 className="size-5" /> Musics
                         </Button>
                       </Link>
 
@@ -213,6 +216,14 @@ const ArtistsTable = () => {
             </tbody>
           </table>
         </div>
+
+        {isError && (
+          <div className="p-3 text-center">
+            <h3 className="text-destructive">
+              Something went wrong, Try again later.
+            </h3>
+          </div>
+        )}
 
         <TableFooter
           isPending={isPending}

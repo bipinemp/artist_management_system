@@ -35,7 +35,7 @@ const MusicsTable = ({ artist_id }: { artist_id: number }) => {
     genre: "rnb" | "country" | "classic" | "rock" | "jazz";
   }>(INITIAL_DATA);
 
-  const { data, isPending } = useQuery<PaginatedMusicsData>({
+  const { data, isPending, isError } = useQuery<PaginatedMusicsData>({
     queryKey: ["musics", page],
     queryFn: () => getAllArtistMusics(page, 10, artist_id),
   });
@@ -69,7 +69,7 @@ const MusicsTable = ({ artist_id }: { artist_id: number }) => {
           className="sm:max-w-[425px]"
         >
           <DialogHeader>
-            <DialogTitle>Update User</DialogTitle>
+            <DialogTitle>Update Music</DialogTitle>
           </DialogHeader>
 
           <EditMusicForm
@@ -162,6 +162,14 @@ const MusicsTable = ({ artist_id }: { artist_id: number }) => {
             </tbody>
           </table>
         </div>
+
+        {isError && (
+          <div className="p-3 text-center">
+            <h3 className="text-destructive">
+              Something went wrong, Try again later.
+            </h3>
+          </div>
+        )}
 
         <TableFooter
           isPending={isPending}

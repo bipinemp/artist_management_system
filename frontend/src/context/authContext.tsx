@@ -1,6 +1,12 @@
 import { User } from "@/types/types";
 import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 import toast from "react-hot-toast";
 
 const baseURL = import.meta.env.VITE_API_URL;
@@ -37,7 +43,7 @@ export const AuthContextProvider = ({
   const [isLogging, setIsLogging] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const fetchAccessToken = async () => {
       if (!auth?.access_token) {
         try {

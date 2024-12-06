@@ -41,7 +41,7 @@ const UsersTable = () => {
     address: "",
   });
 
-  const { data, isPending } = useQuery<PaginatedUsersData>({
+  const { data, isPending, isError } = useQuery<PaginatedUsersData>({
     queryKey: ["users", page],
     queryFn: () => getAllUsers(page, 10),
   });
@@ -213,6 +213,14 @@ const UsersTable = () => {
             </tbody>
           </table>
         </div>
+
+        {isError && (
+          <div className="p-3 text-center">
+            <h3 className="text-destructive">
+              Something went wrong, Try again later.
+            </h3>
+          </div>
+        )}
 
         <TableFooter
           isPending={isPending}

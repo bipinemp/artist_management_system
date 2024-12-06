@@ -13,7 +13,7 @@ const Music = () => {
   return (
     <>
       <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
-        <DialogContent className="h-fit max-h-screen overflow-y-auto">
+        <DialogContent className="h-fit sm:max-w-[425px] max-h-screen overflow-y-auto">
           <DialogTitle title="Create Music" className="mb-3">
             Create Music
           </DialogTitle>

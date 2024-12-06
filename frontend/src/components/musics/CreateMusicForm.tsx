@@ -105,7 +105,7 @@ const CreateMusicForm = ({ setIsCreateDialogOpen, artist_id }: Props) => {
           render={({ field }) => {
             return (
               <Select onValueChange={field.onChange} value={field.value}>
-                <SelectTrigger id="genre" className="w-[180px]">
+                <SelectTrigger id="genre">
                   <SelectValue placeholder="Select Genre" />
                 </SelectTrigger>
                 <SelectContent>
