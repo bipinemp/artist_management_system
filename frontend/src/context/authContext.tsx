@@ -100,7 +100,6 @@ export const AuthContextProvider = ({
             return API.request(error.config);
           } catch (error) {
             setAuth(undefined);
-
             return Promise.reject(error);
           }
         }

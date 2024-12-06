@@ -24,7 +24,7 @@ export const createArtist = async (data: any) => {
   }
 };
 
-export const deleteArtist = async (id: string) => {
+export const deleteArtist = async (id: number) => {
   try {
     const response = await API.delete(`/artists/${id}`);
     return response;
@@ -34,7 +34,7 @@ export const deleteArtist = async (id: string) => {
 };
 
 type UpdateProps = {
-  id: string;
+  id: number;
   artistData: any;
 };
 

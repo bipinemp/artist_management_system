@@ -27,3 +27,43 @@ export type PaginatedUsersData = {
     users: FullUser[];
   };
 };
+
+export type FullMusic = {
+  id: number;
+  title: string;
+  genre: "rnb" | "country" | "classic" | "rock" | "jazz";
+  album_name: string;
+};
+
+export type FullArtist = {
+  id: number;
+  name: string;
+  dob: string;
+  gender: "m" | "f" | "o";
+  address: string;
+  first_release_year: number;
+  no_of_albums_released: number;
+  musics?: FullMusic[];
+};
+
+export type PaginatedArtistData = {
+  message: string;
+  artistsData: {
+    pagination: {
+      currentPage: number;
+      totalPages: number;
+    };
+    artists: FullArtist[];
+  };
+};
+
+export type PaginatedMusicsData = {
+  message: string;
+  musicsData: {
+    pagination: {
+      currentPage: number;
+      totalPages: number;
+    };
+    musics: FullMusic[];
+  };
+};

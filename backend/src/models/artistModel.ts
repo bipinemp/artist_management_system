@@ -22,7 +22,7 @@ export const getArtists = async (page: number = 1, pageSize: number = 10) => {
       [pageSize, skip]
     );
 
-    const artistsCountResult = await pool.query("SELECT COUNT(id) from users");
+    const artistsCountResult = await pool.query("SELECT COUNT(id) from artist");
     const totalArtists = parseInt(artistsCountResult.rows[0].count);
     const totalPages = Math.ceil(totalArtists / pageSize);
 

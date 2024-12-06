@@ -14,13 +14,20 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Link, useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { createUser } from "@/apis/user";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-const Register = () => {
+const Register = ({
+  fromDashboard = false,
+  setIsCreateDialogOpen,
+}: {
+  fromDashboard?: boolean;
+  setIsCreateDialogOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const {
     control,
@@ -34,8 +41,11 @@ const Register = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: createUser,
     onSettled(data: any) {
-      console.log("data : ", data);
       if (data.status === 201) {
+        queryClient.invalidateQueries({ queryKey: ["users"] });
+        if (setIsCreateDialogOpen) {
+          setIsCreateDialogOpen(false);
+        }
         toast.success("Registered Successfully.");
         navigate("/login");
       } else {
@@ -49,17 +59,25 @@ const Register = () => {
   };
 
   return (
-    <Card className="mx-auto max-w-md bg-zinc-100 border-primary/30 my-10">
+    <Card
+      className={cn("border-primary/30 max-w-md", {
+        "mx-auto bg-zinc-100 my-10": !fromDashboard,
+      })}
+    >
       <CardHeader>
-        <CardTitle className="text-2xl">Register</CardTitle>
-        <CardDescription>
-          Enter your details to register your account
-        </CardDescription>
+        <CardTitle className="text-2xl">
+          {fromDashboard ? "Create User" : "Register"}
+        </CardTitle>
+        {!fromDashboard && (
+          <CardDescription>
+            Enter your details to register your account
+          </CardDescription>
+        )}
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
-          <div className="flex items-start gap-x-5 justify-between">
-            <div className="grid gap-2">
+          <div className="w-full flex items-start gap-x-5 justify-between">
+            <div className="w-full grid gap-2">
               <Label htmlFor="first_name">*First name</Label>
               <Input
                 {...register("first_name")}
@@ -77,11 +95,11 @@ const Register = () => {
               )}
             </div>
 
-            <div className="grid gap-2">
+            <div className="w-full grid gap-2">
               <Label htmlFor="last_name">*Last name</Label>
               <Input
                 {...register("last_name")}
-                id="last_name"
+                id="w-full last_name"
                 type="text"
                 placeholder="Doe"
                 className={cn("py-5", {
@@ -166,6 +184,11 @@ const Register = () => {
                 );
               }}
             />
+            {errors?.gender?.message && (
+              <span className="text-destructive text-xs font-semibold">
+                * {errors?.gender?.message}
+              </span>
+            )}
           </div>
 
           <div className="flex items-start gap-x-5 justify-between">
@@ -226,19 +249,23 @@ const Register = () => {
           <Button disabled={isPending} type="submit" className="w-full">
             {isPending ? (
               <span className="flex items-center gap-x-2">
-                <Loader2 className="animate-spin size-5" /> Registering...
+                <Loader2 className="animate-spin size-5" />{" "}
+                {fromDashboard ? "Creating user..." : "Registering..."}
               </span>
             ) : (
-              "Register"
+              <>{fromDashboard ? "Create user" : "Register user"}</>
             )}
           </Button>
         </form>
-        <div className="mt-4 text-center text-sm">
-          Already have an account?{" "}
-          <Link to="/login" className="underline">
-            Login
-          </Link>
-        </div>
+
+        {!fromDashboard && (
+          <div className="mt-4 text-center text-sm">
+            Already have an account?{" "}
+            <Link to="/login" className="underline">
+              Login
+            </Link>
+          </div>
+        )}
       </CardContent>
     </Card>
   );

@@ -9,17 +9,17 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../../components/ui/alert-dialog";
+} from "../ui/alert-dialog";
 import { Button } from "../ui/button";
 import { Loader2, Trash } from "lucide-react";
 
 type Props = {
   id: number;
   isDeleting: boolean;
-  deleteUserRecord: UseMutateFunction<any, Error, number, unknown>;
+  deleteArtistRecord: UseMutateFunction<any, Error, number, unknown>;
 };
 
-const DeleteUserAlert = ({ id, isDeleting, deleteUserRecord }: Props) => {
+const DeleteArtistAlert = ({ id, isDeleting, deleteArtistRecord }: Props) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger>
@@ -35,12 +35,13 @@ const DeleteUserAlert = ({ id, isDeleting, deleteUserRecord }: Props) => {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the user.
+            This action cannot be undone. This will permanently delete the
+            artist.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => deleteUserRecord(id)}>
+          <AlertDialogAction onClick={() => deleteArtistRecord(id)}>
             {isDeleting ? (
               <span>
                 <Loader2 className="animate-spin size-5" /> Deleting...
@@ -55,4 +56,4 @@ const DeleteUserAlert = ({ id, isDeleting, deleteUserRecord }: Props) => {
   );
 };
 
-export default DeleteUserAlert;
+export default DeleteArtistAlert;
