@@ -7,7 +7,9 @@ export const getUsers = async (page: number = 1, pageSize: number = 10) => {
 
     const result = await pool.query(
       `SELECT id, first_name, last_name, email, phone, dob, gender, address 
-       FROM users LIMIT $1 OFFSET $2`,
+       FROM users 
+       ORDER BY created_at DESC
+       LIMIT $1 OFFSET $2`,
       [pageSize, skip]
     );
 

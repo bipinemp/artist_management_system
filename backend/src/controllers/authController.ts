@@ -12,7 +12,7 @@ export const loginUser = async (req: Request, res: Response) => {
       [email]
     );
 
-    if (result.rows[0].count === "0") {
+    if (result.rowCount === 0) {
       res.status(401).json({ message: "Invalid Credentials." });
       return;
     }
@@ -65,7 +65,6 @@ export const loginUser = async (req: Request, res: Response) => {
       access_token: accessToken,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "Something went wrong, Try again later." });
   }
 };
@@ -106,7 +105,13 @@ export const refreshToken = async (req: Request, res: Response) => {
               { expiresIn: "15m" }
             );
 
-            res.status(200).json({ userData });
+            res.status(200).json({
+              access_token: userData,
+              user_id: decoded.user_id,
+              email: decoded.email,
+              first_name: decoded.first_name,
+              last_name: decoded.last_name,
+            });
           }
         }
       );
