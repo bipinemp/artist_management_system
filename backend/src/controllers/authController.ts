@@ -31,6 +31,8 @@ export const loginUser = async (req: Request, res: Response) => {
     const accessToken = jwt.sign(
       {
         user_id: result.rows[0].id,
+        first_name: result.rows[0].first_name,
+        last_name: result.rows[0].last_name,
         email: result.rows[0].email,
       },
       process.env.ACCESS_TOKEN_SECRET as string,
@@ -40,6 +42,8 @@ export const loginUser = async (req: Request, res: Response) => {
     const refreshToken = jwt.sign(
       {
         user_id: result.rows[0].id,
+        first_name: result.rows[0].first_name,
+        last_name: result.rows[0].last_name,
         email: result.rows[0].email,
       },
       process.env.REFRESH_TOKEN_SECRET as string,
@@ -91,16 +95,18 @@ export const refreshToken = async (req: Request, res: Response) => {
           if (err) {
             res.status(401).json({ message: "Unauthorized." });
           } else {
-            const accessToken = jwt.sign(
+            const userData = jwt.sign(
               {
                 user_id: decoded.user_id,
                 email: decoded.email,
+                first_name: decoded.first_name,
+                last_name: decoded.last_name,
               },
               process.env.ACCESS_TOKEN_SECRET as string,
               { expiresIn: "15m" }
             );
 
-            res.status(200).json({ accessToken });
+            res.status(200).json({ userData });
           }
         }
       );
