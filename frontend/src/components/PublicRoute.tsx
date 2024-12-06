@@ -9,7 +9,11 @@ const PublicRoute = ({ children }: { children: ReactNode }) => {
     return <Navigate to="/dashboard" replace />;
   }
 
-  return <>{children}</>;
+  return (
+    <div className="py-10 bg-gradient-to-r from-violet-500 to-purple-500 min-h-screen h-full">
+      {children}
+    </div>
+  );
 };
 
 export default PublicRoute;

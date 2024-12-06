@@ -94,9 +94,9 @@ const UsersTable = () => {
         </DialogContent>
       </Dialog>
 
-      <div className="bg-white w-full relative overflow-hidden rounded-md shadow border border-input">
-        <div className="w-full table-wrapper overflow-x-auto">
-          <table className="relative w-full text-left">
+      <div className="bg-white overflow-hidden relative rounded-md shadow border border-input">
+        <div className="overflow-auto">
+          <table className="w-full text-left">
             <thead className="border-b border-t bg-gray-50 uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3">

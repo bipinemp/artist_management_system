@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { useAuth } from "../context/authContext";
+import MblSidebar from "./MblSidebar";
 
 const DashboardLayout = () => {
   const { auth } = useAuth();
@@ -12,7 +13,8 @@ const DashboardLayout = () => {
   return (
     <div className="flex gap-x-10 overflow-x-hidden">
       <Sidebar />
-      <div className="max-w-[1000px] w-full py-10 px-5 ml-60">
+      <div className="w-full px-6 pb-10 pt-5 md:px-5 md:pl-60">
+        <MblSidebar />
         <Outlet />
       </div>
     </div>

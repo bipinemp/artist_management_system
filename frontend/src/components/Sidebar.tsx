@@ -8,7 +8,7 @@ const Sidebar = () => {
   const { auth, logout } = useAuth();
 
   return (
-    <aside className="w-[200px] fixed left-0 top-0 h-screen bg-primary text-secondary flex flex-col justify-between">
+    <aside className="w-[200px] hidden fixed left-0 top-0 h-screen bg-primary text-secondary md:flex flex-col justify-between">
       <div className="flex flex-col gap-y-10">
         <div className="flex flex-col py-3 mx-2 rounded-md mt-2 px-5 bg-secondary/20 border border-secondary/40">
           <h3>

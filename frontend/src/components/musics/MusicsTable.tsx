@@ -81,7 +81,7 @@ const MusicsTable = ({ artist_id }: { artist_id: number }) => {
 
       <div className="bg-white relative overflow-hidden rounded-md shadow border border-input">
         <div className="overflow-x-auto">
-          <table className="relative text-left">
+          <table className="relative w-full text-left">
             <thead className="border-b border-t bg-gray-50 uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-10 py-3">
@@ -93,7 +93,7 @@ const MusicsTable = ({ artist_id }: { artist_id: number }) => {
                 <th scope="col" className="px-10 py-3">
                   Genre
                 </th>
-                <th scope="col" className="px-10 py-3">
+                <th scope="col" className="px-10 text-right py-3">
                   Actions
                 </th>
               </tr>
@@ -126,7 +126,7 @@ const MusicsTable = ({ artist_id }: { artist_id: number }) => {
 
                     <td
                       scope="row"
-                      className="flex items-center justify-center gap-x-3 whitespace-nowrap px-10 py-4 font-medium text-gray-900 dark:text-white"
+                      className="flex items-center justify-end gap-x-3 whitespace-nowrap px-10 py-4 font-medium text-gray-900 dark:text-white"
                     >
                       <Button
                         onClick={() => {

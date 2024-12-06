@@ -10,7 +10,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
-import { Button } from "../ui/button";
 import { Loader2, Trash } from "lucide-react";
 
 type Props = {
@@ -22,14 +21,8 @@ type Props = {
 const DeleteMusicAlert = ({ id, isDeleting, deleteMusicRecord }: Props) => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
-        <Button
-          variant={"outline"}
-          size={"icon"}
-          className="border-destructive/70"
-        >
-          <Trash className="size-5 text-destructive" strokeWidth={3} />
-        </Button>
+      <AlertDialogTrigger className="border p-2 rounded-md border-destructive/70">
+        <Trash className="size-5 text-destructive" strokeWidth={3} />
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
