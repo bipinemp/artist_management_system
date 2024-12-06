@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Edit, Loader } from "lucide-react";
+import { Edit, Eye, Loader } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -16,6 +16,7 @@ import TableFooter from "../TableFooter";
 import { deleteArtist, getAllArtists } from "@/apis/artist";
 import EditArtistForm from "./EditArtistForm";
 import DeleteArtistAlert from "./DeleteArtistAlert";
+import { Link } from "react-router-dom";
 
 const ArtistsTable = () => {
   const INITIAL_DATA: FullArtist = {
@@ -189,6 +190,16 @@ const ArtistsTable = () => {
                       >
                         <Edit className="size-5" />
                       </Button>
+
+                      <Link to={`/dashboard/${name}/${id}/musics`}>
+                        <Button
+                          variant={"secondary"}
+                          className="border border-gray-500"
+                          size={"icon"}
+                        >
+                          <Eye className="size-5" />
+                        </Button>
+                      </Link>
 
                       <DeleteArtistAlert
                         id={id}

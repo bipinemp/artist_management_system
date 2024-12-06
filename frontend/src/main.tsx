@@ -12,6 +12,7 @@ import Register from "./pages/auth/Register.tsx";
 import DashboardLayout from "./components/DashboardLayout.tsx";
 import User from "./pages/dashboard/User.tsx";
 import Artist from "./pages/dashboard/Artist.tsx";
+import Music from "./pages/dashboard/Music.tsx";
 
 const router = createBrowserRouter([
   { path: "/", element: <AuthRedirect /> },
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <User /> },
       { path: "/dashboard/artist", element: <Artist /> },
+      { path: "/dashboard/:name/:id/musics", element: <Music /> },
     ],
   },
 ]);

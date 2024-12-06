@@ -22,14 +22,14 @@ export const getAllArtistMusics = async (
 
 export const createMusic = async (data: any) => {
   try {
-    const response = await API.post("/musics", { ...data });
+    const response = await API.post("/musics", data);
     return response;
   } catch (error: any) {
     return error;
   }
 };
 
-export const deleteMusic = async (id: string) => {
+export const deleteMusic = async (id: number) => {
   try {
     const response = await API.delete(`/musics/${id}`);
     return response;
@@ -39,7 +39,7 @@ export const deleteMusic = async (id: string) => {
 };
 
 type UpdateProps = {
-  id: string;
+  id: number;
   musicData: any;
 };
 

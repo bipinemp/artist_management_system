@@ -34,7 +34,6 @@ export const getArtists = async (page: number = 1, pageSize: number = 10) => {
       },
     };
   } catch (error) {
-    console.log(error);
     throw new Error("Unable to fetch artists from database.");
   }
 };

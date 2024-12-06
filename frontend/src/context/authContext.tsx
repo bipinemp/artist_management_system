@@ -135,7 +135,6 @@ export const AuthContextProvider = ({
       }
     } catch (error: any) {
       setIsLogging(false);
-      console.log(error);
       toast.error(error.response.data.message);
     } finally {
       setIsLogging(false);
@@ -152,7 +151,6 @@ export const AuthContextProvider = ({
         window.location.href = "/login";
       }
     } catch (error: any) {
-      console.log(error);
       setIsLoggingOut(false);
       toast.error("Something went wrong, Try again later.");
     } finally {

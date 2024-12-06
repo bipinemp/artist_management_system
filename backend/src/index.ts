@@ -26,7 +26,22 @@ app.use(
 );
 
 // async function dbrun() {
-//   const countResult = await pool.query(`TRUNCATE TABLE users`);
+//   const countResult = await pool.query(`
+//       INSERT INTO music (title, album_name, genre, artist_id)
+// VALUES
+//   ('Sambodhan', 'Sambodhan', 'rock', 3),
+//   ('Samjhi Baschu', 'Samjhi Baschu', 'rock', 3),
+//   ('Hami Yestai Ta Ho Ni Bro', 'Hami Yestai Ta Ho Ni Bro', 'rnb', 3),
+//   ('Yo Mann Ta Mero Nepali', 'Yo Mann Ta Mero Nepali', 'classic', 3),
+//   ('Udhne Raat', 'Udhne Raat', 'jazz', 3),
+//   ('Yatra', 'Yatra', 'rock', 3),
+//   ('Parelima', 'Parelima', 'country', 3),
+//   ('Maya', 'Maya', 'rnb', 3),
+//   ('Pahilo Jindagani', 'Pahilo Jindagani', 'rock', 3),
+//   ('Bohora', 'Bohora', 'rock', 3),
+//   ('Raat Ko Bato', 'Raat Ko Bato', 'jazz', 3);
+
+// `);
 //   console.log("countREsult : ", countResult);
 // }
 

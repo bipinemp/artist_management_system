@@ -9,7 +9,9 @@ export const getArtistMusics = async (
     const skip = (page - 1) * pageSize;
 
     const result = await pool.query(
-      `SELECT * FROM music WHERE artist_id = $1 LIMIT $2 OFFSET $3`,
+      `SELECT * FROM music WHERE artist_id = $1 
+       ORDER BY created_at DESC
+       LIMIT $2 OFFSET $3`,
       [artist_id, pageSize, skip]
     );
 
@@ -74,7 +76,6 @@ export const updateMusic = async (
 
     return updateResult.rows[0];
   } catch (error) {
-    console.log(error);
     throw new Error("Unable to update music in database.");
   }
 };

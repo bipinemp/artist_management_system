@@ -58,8 +58,6 @@ const EditUserForm = ({ setEditDialog, editedUserData }: Props) => {
       userData: data,
     };
 
-    console.log(updateData);
-
     mutate(updateData);
   };
 

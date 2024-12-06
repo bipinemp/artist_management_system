@@ -59,7 +59,7 @@ export type PaginatedArtistData = {
 
 export type PaginatedMusicsData = {
   message: string;
-  musicsData: {
+  artistMusicData: {
     pagination: {
       currentPage: number;
       totalPages: number;
