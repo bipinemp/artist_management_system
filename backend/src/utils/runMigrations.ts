@@ -21,17 +21,20 @@ const runMigrations = async (fileName?: string) => {
       const files = await fs.readdir(migrationsPath);
       for (const file of files) {
         const filePath = path.join(migrationsPath, file);
-        const sql = await fs.readFile(filePath, "utf8");
+        const stats = await fs.stat(filePath);
 
-        console.log(`Running migration: ${file}`);
-        await pool.query(sql);
+        if (stats.isFile()) {
+          const sql = await fs.readFile(filePath, "utf8");
+          console.log(`Running migration: ${file}`);
+          await pool.query(sql);
+        }
       }
       console.log("<------------- All Migrations Completed ------------->");
     }
+    process.exit(0);
   } catch (error) {
     console.error("Migration Failed: ", error);
-  } finally {
-    await pool.end();
+    process.exit(1);
   }
 };
 

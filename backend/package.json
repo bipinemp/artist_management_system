@@ -5,7 +5,8 @@
   "scripts": {
     "watch": "src",
     "dev": "nodemon src/index.ts",
-    "migrate": "nodemon src/utils/runMigrations.ts"
+    "migrate": "ts-node src/utils/runMigrations.ts",
+    "seed": "ts-node src/utils/seed.ts"
   },
   "keywords": [],
   "author": "",
