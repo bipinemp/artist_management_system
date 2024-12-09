@@ -4,9 +4,7 @@ import pool from "../configs/db";
 
 const seedDatabase = async () => {
   try {
-    const seedFilePath = path
-      .resolve(__dirname, "../db/seeds/seed.sql")
-      .replace(/\\/g, "/");
+    const seedFilePath = path.join(__dirname, "../db/seeds/seed.sql");
     console.log("Seed file path:", seedFilePath);
     const seedSQL = fs.readFileSync(seedFilePath, "utf8");
 
