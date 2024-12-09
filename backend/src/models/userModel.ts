@@ -34,10 +34,10 @@ export const createUser = async (
   last_name: string,
   email: string,
   password: string,
-  phone: string,
-  dob: string,
   gender: string,
-  address: string
+  phone?: string,
+  dob?: string,
+  address?: string
 ) => {
   try {
     const userExists = await pool.query(
@@ -53,16 +53,17 @@ export const createUser = async (
 
     const result = await pool.query(
       `INSERT INTO users (first_name, last_name, email, password, phone, dob, gender, address) 
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING id, first_name, last_name, email, phone, dob, gender, address`,
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+       RETURNING id, first_name, last_name, email, phone, dob, gender, address`,
       [
         first_name,
         last_name,
         email,
         hashedPassword,
-        phone,
-        dob,
+        phone || null,
+        dob || null,
         gender,
-        address,
+        address || null,
       ]
     );
 
@@ -93,7 +94,15 @@ export const updateUser = async (
     const updateResult = await pool.query(
       `UPDATE users SET first_name = $1, last_name = $2, phone = $3, dob = $4, gender = $5, address = $6 WHERE id = $7 
        RETURNING id, first_name, last_name, email, phone, dob, gender, address`,
-      [first_name, last_name, phone, dob, gender, address, id]
+      [
+        first_name,
+        last_name,
+        phone || null,
+        dob || null,
+        gender,
+        address || null,
+        id,
+      ]
     );
 
     return updateResult.rows[0];

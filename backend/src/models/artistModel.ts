@@ -50,7 +50,14 @@ export const createArtist = async (
     const result = await pool.query(
       `INSERT INTO artist (name, dob, gender, address, first_release_year, no_of_albums_released)
        VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`,
-      [name, dob, gender, address, first_release_year, no_of_albums_released]
+      [
+        name,
+        dob,
+        gender,
+        address || null,
+        first_release_year,
+        no_of_albums_released,
+      ]
     );
 
     return result.rows[0];
@@ -85,7 +92,7 @@ export const updateArtist = async (
         name,
         dob,
         gender,
-        address,
+        address || null,
         first_release_year,
         no_of_albums_released,
         id,

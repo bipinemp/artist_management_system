@@ -156,7 +156,7 @@ const ArtistsTable = () => {
                       scope="row"
                       className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                     >
-                      {address}
+                      {address || "N/A"}
                     </td>
 
                     <td

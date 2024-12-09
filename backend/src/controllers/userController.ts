@@ -43,9 +43,9 @@ export const createUserData = async (req: Request, res: Response) => {
       last_name,
       email,
       password,
+      gender,
       phone,
       dob,
-      gender,
       address
     );
 

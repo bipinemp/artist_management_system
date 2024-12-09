@@ -154,14 +154,14 @@ const UsersTable = () => {
                       scope="row"
                       className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                     >
-                      {phone}
+                      {phone || "N/A"}
                     </td>
 
                     <td
                       scope="row"
                       className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                     >
-                      {moment(dob).format("YYYY-MM-DD")}
+                      {dob ? moment(dob).format("YYYY-MM-DD") : "N/A"}
                     </td>
 
                     <td
@@ -175,7 +175,7 @@ const UsersTable = () => {
                       scope="row"
                       className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                     >
-                      {address}
+                      {address || "N/A"}
                     </td>
 
                     <td
