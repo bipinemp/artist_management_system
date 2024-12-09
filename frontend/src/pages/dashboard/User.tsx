@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import UsersTable from "@/components/users/UsersTable";
 import { useState } from "react";
-import { Dialog, DialogContent, DialogTitle } from "../../components/ui/dialog";
+import { Dialog, DialogContent } from "../../components/ui/dialog";
 import Register from "../auth/Register";
 
 const User = () => {
@@ -11,8 +11,7 @@ const User = () => {
   return (
     <>
       <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
-        <DialogContent className="p-0 m-0 max-w-md">
-          <DialogTitle title="Create user"></DialogTitle>
+        <DialogContent className="p-0 m-0 max-w-md h-fit">
           <Register
             fromDashboard={true}
             setIsCreateDialogOpen={setIsCreateDialogOpen}
